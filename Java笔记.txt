@@ -1,0 +1,127 @@
+1.输入一个数：Scanner r=new Scanner(System.in);
+		int a=r.nexInt();
+  输入一个字符：Scanner r=new Scanner(System.in);//创建一个串对象
+		String chuan=r.nextLine();//输入一个串
+		char zifu=chuan.charAt(i);//i为chuan的第i+1个字符
+2.定义一个数组：    动态： int a[]=new int[10]；或分步：   int a[] ;   a[]=new int[10];
+	              静态:     int a[]=new int []{1,2,3,4.....}; 或省略new  int[]
+                        字符串数组:   String a[]=new String[10];
+   数组长度：a.length  得到的是一个int类型的值。
+3.编译器的常量优化：在给变量赋值时，如果全为常量，那么编译器自动进行常量的运算如int  a=1+1；等价于int a=2；若有变量，如int a=3+b；则无。
+4.动态初始化数组的时候，在被赋值之前，元素自动有一个默认值。整数类型（0），浮点类型（0.0），字符类型（"\u0000"），布尔类型（false），引用类型（null）。
+5.静态初始化数组的时候，其实也有默认值的过程，只不过系统很快将他替换成为了你所赋的那个值。
+6.成员变量（物体的属性），成员方法（物体的功能）。成员变量直接定义在类当中，成员方法不能写static关键字。
+7.类不能直接使用，需要根据类创建一个对象。格式为：类名称 对象名= new 类名称();    使用成员变量：对象名.成员变量名；使用成员方法：对象名.成员方法名();
+8.手机图纸类，手机对象：（在一个class里面，被调用的类不能加public，在同一个包下可以加public）
+package PackageName;
+
+public class shouji {
+    public static void main(String[] args) {
+        tuzhi shouji = new tuzhi();
+        System.out.println(shouji.brand="iphone12 pro max 512G");
+        System.out.println(shouji.color="pink");
+        System.out.println(shouji.price=8848);
+        shouji.call("马化腾");
+        shouji.sendPassage();
+        shouji.play();
+    }
+}
+class tuzhi {
+    String brand,color;
+    int price;
+    public void call(String who){
+        System.out.println("给"+who+"打电话");
+    }
+    public void sendPassage(){
+        System.out.println("发短信");
+    }
+    public void play(){
+        System.out.println("刷抖音");
+    }
+}
+9.IDEA常用快捷键：Alt+回车（自动修正），Ctrl+D（复制光标所在行内容，插入到光标下面那一行），Ctrl+Alt+L（格式化代码），shift+Alt+上下键（上下移动当前代码行）。
+10.获得随机数：       （1）.     Math.random() 静态方法，获取0-1之间的数。
+			System.out.println(Math.random());
+		（2）.      java.util.Random 工具类。
+			import java.util.Random;
+			Random random = new Random();
+			System.out.println(random.nextInt(最大值范围int型数字));
+		（3）.      继承（1）
+			System.out.println((int)(a+Math.random()*b));//产生（a，a+b）之间的一个随机数。
+   获得随机字符串：     
+package PackageName;
+
+import java.util.Random;
+
+public class RandomString {
+    public static void main(String[] args) {
+        System.out.println(RandomString.getStringRandom(5));
+        System.out.println(RandomString.getStringRandom(10));
+        System.out.println(RandomString.getStringRandom(15));
+    }
+    public static String getStringRandom(int length){
+        Random random=new Random();
+        StringBuffer sb =new StringBuffer();
+        for (int i = 0; i <length ; i++) {
+            int number= random.nextInt(3);
+            long result =0;
+            switch (number) {
+                case 0:
+                    result=Math.round(Math.random()*25+65);
+                    sb.append(String.valueOf((char)(result)));
+                    break;
+                case 1:
+                    result=Math.round(Math.random()*25+97);
+                    sb.append(String.valueOf((char) result));
+                    break;
+                case 2:
+                    sb.append(String.valueOf(new Random().nextInt(10)));
+            }
+        }
+        return sb.toString();
+    }
+}
+11.一些常量的使用：Math.PI=π，Math.pow(a,b)是求a的b次方，Math.abs(c)是求c的绝对值，Math.E=e。
+12.实现自由位小数：
+        java.text.DecimalFormat df = new java.text.DecimalFormat("0.0000");
+        int x=4/3;
+        System.out.println(df.format(x));//1.0000，且x仍为int型。
+13.比较字符串是否相等：
+	String name="喜炎";
+        System.out.println( "喜炎".equals(name));//true
+14.对数组进行升序排序：
+			import java.util.Arrays;
+         			int a[]=new int[]{5,4,3,2,1};
+        			Arrays.sort(a);
+        			for (int i = 0; i < 5; i++) {
+        			System.out.print(a[i]+"  ");
+        			}//1  2  3  4  5
+15.判断两个(任意类型的)数组是否相等：
+			int a[]=new int[5]{1,2,3,4,5};
+			int b[]=new int[5]{5,4,3,2,1};
+			String shuzu1=String.valueOf(a);
+			String shuzu2=String.valueOf(b);
+			System.out.println(shuzu1.equals(shuzu2));//false
+16.数组截取复制：
+			import java.util.Arrays;
+			int a[]={1,2,3,4,5,6,7,8,9};
+        			int b[]=new int[5];
+        			System.arraycopy(a,1,b,0,3);//原数组，原数组起始位置，新数组，新数组起始位置，复制长度。
+        			System.out.println(Arrays.toString(b));//[2, 3, 4, 0, 0]
+17.数据类型范围：		byte：	-128~127
+			short：    -32768~32767
+			int：      -21亿~21亿
+			long：    -922亿亿~922亿亿
+			float：	3.4*10的38次方~1.4*10的45次方
+			double：	3*10的三百多次方
+			由大到小依次为：double > float > long > int > short > byte
+18.数据类型转化：
+			1.自动类型转换：将范围小的转换为范围大的。如，long a=100；100是默认的int型，将int给了long，符合小范围给大范围。
+			2.强制类型转换：将大范围的转化为小范围的。如，int a=（int）100L；100L是long类型，加上（int）表示强制将100L转化为int类型。
+			强制类型转换时：     a.若数据范围超出int，不会报错，但是数据溢出，不会准确显示该数字。
+					b.从小数强制类型转化为整数，会有精度损失，会丢掉小数部分。
+					c.byte/short/char三种类型在进行运算时，会首先被提升为int类型。如byte num1=1；byte num2=2；则应该用 int mun3=num1+num2；因为int+int应该等于int。也可以强制转化：byte num3=（byte）（num1+num2）；
+19.二进制负数转化为十进制：反转-加1-化为十进制-添负号
+			如-8；11000，反转：00111。加1：01000（8）。添负号：-8
+     十进制负数转化为二进制：去负号-化为二进制-减1-反转
+			如-8；去负号：8。化为二进制：01000。减1：00111。反转：11000
